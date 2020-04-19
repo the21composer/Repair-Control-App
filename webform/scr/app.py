@@ -16,6 +16,14 @@ class Error(EmbeddedMongoModel):
         write_concern = WriteConcern(j=True)
         connection_alias = 'my-app'
 
+class Repair(EmbeddedMongoModel):
+    deadline = fields.DateTimeField()
+    machineID = fields.IntegerField()
+    repairID = fields.IntegerField()
+    description = fields.CharField()
+    in_progress = fields.BooleanField()
+    completed = fields.BooleanField()
+
 class Equipment(MongoModel):
     machineID = fields.IntegerField()
     model = fields.CharField()
