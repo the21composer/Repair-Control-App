@@ -21,52 +21,44 @@
     <a class="navbar-brand ml-3" href="#">Ремонтный рабочий</a>
   </nav>
   <div class="row p-3 w-100">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-9">
       <div class="card p-3 mb-3 small-shadow d-flex flex-column align-items-center">
         <div class="container">
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Data</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Machine</th>
                 <th scope="col">Task</th>
-                <th scope="col"></th>
-                <th scope="col">Submit</th>
+                <th scope="col">Description</th>
+                <th scope="col">Progress</th>
               </tr>
             </thead>
             <tbody>
+              {% for rep in Repair.objects.all() %}
               <tr>
-                <th scope="row">12.11</th>
-                <td>repair type ? machine ?
-                <td><button type="button" class="btn btn-info">Info</button></td>
-                </td>
+                <td scope="row">{{rep.deadline.strftime("%d %b %Y %H:%M")}}</td>
+                <td scope="row">{{rep.machineID}} </td>
+                <td scope="row">{{rep.repairID}}</td>
+                <td scope="row col-3">{{rep.description}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary">
-                    Submit
-                  </button>
+                  {% if rep.completed %}
+                  Done
+                  {% else %}
+                  <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect" aria-label="Состояние ремонтной работы">
+                      <option selected value="1">Join...</option>
+                      <option value="2">Doing</option>
+                      <option value="3">Done</option>
+                    </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Set</button>
+                    </div>
+                  </div>
+                  {% endif %}
                 </td>
               </tr>
-              <tr>
-                <th scope="row">24.11</th>
-                <td>repair type ? machine ?
-                <td><button type="button" class="btn btn-info">Info</button></td>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary">
-                    Submit
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">27.11</th>
-                <td>repair type ? machine ?
-                <td><button type="button" class="btn btn-info">Info</button></td>
-                <td>
-                  <button type="button" class="btn btn-primary">
-                    Submit
-                  </button>
-                </td>
-                </td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
