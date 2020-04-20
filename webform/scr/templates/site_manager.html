@@ -23,14 +23,14 @@
     <div class="row p-3 w-100">
         <div class="col-12">
             <div class="card p-3 mb-4 small-shadow d-flex flex-column">
-                <h4 class="mb-3">Equipment</h4>
+                <h4 class="mb-3">Оборудование</h4>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">Errors</th>
-                            <th scope="col">Failures</th>
+                            <th scope="col">Модель</th>
+                            <th scope="col">Ошибки</th>
+                            <th scope="col">Отказы</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,23 +43,23 @@
                                 <button class="btn btn-link" type="button" data-toggle="collapse"
                                     data-target="#collapse{{eq.machineID}}" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                    Show
+                                    Показать
                                 </button>
                                 </p>
                                 <div class="collapse" id="collapse{{eq.machineID}}">
                                     <table class="table table-borderless table-hover table-sm">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Time</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Info</th>
+                                                <th scope="col">Дата</th>
+                                                <th scope="col">Тип</th>
+                                                <th scope="col">Детализация</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {%for err in eq.errors %}
                                             <tr>
                                                 <td> {{err.time.strftime("%d %b %Y %H:%M")}}</td>
-                                                <td> {{err.errorID}}</td>
+                                                <td> {{err.etype}}</td>
                                                 <td> {{err.description}}</td>
                                             </tr>
                                             {% endfor %}
@@ -75,23 +75,23 @@
                                 <button class="btn btn-link" type="button" data-toggle="collapse"
                                     data-target="#collapseF{{eq.machineID}}" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                    Show
+                                    Показать
                                 </button>
                                 </p>
                                 <div class="collapse" id="collapseF{{eq.machineID}}">
                                     <table class="table table-borderless table-hover table-sm">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Time</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Info</th>
+                                                <th scope="col">Дата</th>
+                                                <th scope="col">Тип</th>
+                                                <th scope="col">Детализация</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {%for fail in eq.failures %}
                                             <tr>
                                                 <td> {{fail.time.strftime("%d %b %Y %H:%M")}}</td>
-                                                <td> {{fail.failureID}}</td>
+                                                <td> {{fail.ftype}}</td>
                                                 <td> {{fail.description}}</td>
                                             </tr>
                                             {% endfor %}
