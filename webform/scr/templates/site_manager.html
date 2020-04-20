@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="/static/css/iconfont/material-icons.css" rel="stylesheet">
+    <script src="/static/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <title>Начальник участка</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="/" class="align-self-end">
+            <i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i>
+        </a>
+        <a class="navbar-brand ml-3" href="#">Начальник участка</a>
+    </nav>
+    <div class="row p-3 w-100">
+        <div class="col-12">
+            <div class="card p-3 mb-4 small-shadow d-flex flex-column">
+                <h4 class="mb-3">Equipment</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Errors</th>
+                            <th scope="col">Failures</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for eq in Equipment.objects.all() %}
+                        <tr>
+                            <th scope="row">{{eq.machineID}}</th>
+                            <td> {{eq.model}}</td>
+                            <td class="col-5">
+                                {%if eq.errors %}
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse{{eq.machineID}}" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Show
+                                </button>
+                                </p>
+                                <div class="collapse" id="collapse{{eq.machineID}}">
+                                    <table class="table table-borderless table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for err in eq.errors %}
+                                            <tr>
+                                                <td> {{err.time.strftime("%d %b %Y %H:%M")}}</td>
+                                                <td> {{err.errorID}}</td>
+                                                <td> {{err.description}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                    No errors
+                                {% endif %}
+                            </td>
+                            <td class="col-5">
+                                {%if eq.failures %}
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseF{{eq.machineID}}" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Show
+                                </button>
+                                </p>
+                                <div class="collapse" id="collapseF{{eq.machineID}}">
+                                    <table class="table table-borderless table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for fail in eq.failures %}
+                                            <tr>
+                                                <td> {{fail.time.strftime("%d %b %Y %H:%M")}}</td>
+                                                <td> {{fail.failureID}}</td>
+                                                <td> {{fail.description}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                    No Failures
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>*создавать заявки на ремонт</div>
+    <div>*контроль станков</div>
+    <div>*"предикты" и инициация</div>
+</body>
+
+</html>
