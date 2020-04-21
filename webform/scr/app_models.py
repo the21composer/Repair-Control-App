@@ -1,0 +1,50 @@
+from pymodm import EmbeddedMongoModel, MongoModel, fields, connect
+from pymongo.write_concern import WriteConcern
+
+# Connect to MongoDB and call the connection "my-app".
+connect("mongodb://localhost:27017/myDatabase", alias="my-app")
+
+class Error(EmbeddedMongoModel):
+    time = fields.DateTimeField()
+    etype = fields.CharField()
+    description = fields.CharField()
+    class Meta:
+        write_concern = WriteConcern(j=True)
+        connection_alias = 'my-app'
+    
+class Failure(EmbeddedMongoModel):
+    time = fields.DateTimeField()
+    ftype = fields.CharField()
+    description = fields.CharField()
+    class Meta:
+        write_concern = WriteConcern(j=True)
+        connection_alias = 'my-app'
+
+class Repair(MongoModel):
+    deadline = fields.DateTimeField()
+    machineID = fields.IntegerField()
+    rtype = fields.CharField()
+    description = fields.CharField()
+    in_progress = fields.BooleanField()
+    completed = fields.BooleanField()
+    class Meta:
+        write_concern = WriteConcern(j=True)
+        connection_alias = 'my-app'
+
+class Equipment(MongoModel):
+    machineID = fields.IntegerField()
+    model = fields.CharField()
+    revised_on = fields.DateTimeField()
+    errors = fields.EmbeddedDocumentListField(Error)
+    failures = fields.EmbeddedDocumentListField(Failure)
+    class Meta:
+        write_concern = WriteConcern(j=True)
+        connection_alias = 'my-app'
+
+class User(MongoModel):
+    login = fields.CharField(primary_key=True, required=True)
+    password = fields.CharField(required=True)
+    role = fields.CharField(required=True)
+    class Meta:
+        write_concern = WriteConcern(j=True)
+        connection_alias = 'my-app'

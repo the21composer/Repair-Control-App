@@ -1,107 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}Начальник цеха{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link href="/static/css/iconfont/material-icons.css" rel="stylesheet">
-    <script src="/static/js/jquery-3.4.1.slim.min.js"></script>
-    <script src="/static/js/popper.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <title>Начальник цеха</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="/" class="align-self-end">
-            <i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i>
-        </a>
-        <a class="navbar-brand ml-3" href="#">Начальник цеха</a>
-    </nav>
-    <div class="row p-3 w-100">
-        <div class="col-12 col-lg-8">
-            <div class="card p-3 mb-4 small-shadow d-flex flex-column align-items-center">
-                <div class="container">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Тип оборудования</label>
-                        </div>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Выберите...</option>
-                            <option value="1">Тип1</option>
-                            <option value="2">Тип2</option>
-                            <option value="3">Тип3</option>
-                        </select>
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/" class="align-self-end">
+        <i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i>
+    </a>
+    <a class="navbar-brand ml-3" href="#">Начальник цеха</a>
+</nav>
+<div class="row p-3 w-100">
+    <div class="col-12 col-lg-8">
+        <div class="card p-3 mb-4 small-shadow d-flex flex-column align-items-center">
+            <div class="container">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Тип оборудования</label>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-3 col-lg-2">
-                            Мощность
-                        </div>
-                        <div class="col-9 col-lg-10">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tab1">Tab1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tab2">Tab2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tab3">Tab3</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content p-3">
-                        <div class="tab-pane fade show active" id="tab1">
-                            <h2 class="h4 mb-3">Tab1</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, in et nulla impedit,
-                                mollitia eos quae inventore, minus molestiae est consequuntur nobis similique
-                                repudiandae reprehenderit fugit cumque voluptatum laudantium tempore.</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur deleniti animi,
-                                voluptates expedita incidunt dignissimos fugiat repellendus dolorem ut corrupti sit
-                                libero nemo est iusto saepe, facilis rerum quam.</p>
-                        </div>
-                        <div class="tab-pane fade" id="tab2">
-                            <h2 class="h4 mb-3">Tab2</h2>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae soluta qui labore quas
-                                repudiandae illum dolore eum incidunt, quam aut perferendis autem iusto repellat ut
-                                nesciunt ullam dignissimos recusandae quo.</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque atque incidunt modi quam
-                                laboriosam velit sit corporis veritatis optio voluptatum, officia quis quas debitis,
-                                commodi nisi, reprehenderit ratione nesciunt asperiores.</p>
-                        </div>
-                        <div class="tab-pane fade" id="tab3">
-                            <h2 class="h4 mb-3">Tab3</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt accusantium sapiente animi
-                                suscipit magnam ex quasi nihil quas voluptas! Eius minus incidunt iure deserunt dolor
-                                praesentium. Ullam aperiam optio omnis!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, cupiditate! Aspernatur
-                                accusamus dolores tenetur iure rerum ut quibusdam nisi aliquam facilis impedit. Sed amet
-                                nemo, veniam in placeat eveniet illo!</p>
-                        </div>
-                    </div>
-                    Тут может быть информация об общем состоянии, например, разделенная по типам машин
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Выберите...</option>
+                        <option value="1">Тип1</option>
+                        <option value="2">Тип2</option>
+                        <option value="3">Тип3</option>
+                    </select>
                 </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mb-4">
-            <div class="card p-3 small-shadow d-flex flex-column align-items-center">
-                <div class="container" style="height:40vh">
-                    Тут может быть еще какая-то информация
+                <div class="row mb-3">
+                    <div class="col-3 col-lg-2">
+                        Мощность
+                    </div>
+                    <div class="col-9 col-lg-10">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
                 </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab1">Tab1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab2">Tab2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab3">Tab3</a>
+                    </li>
+                </ul>
+                <div class="tab-content p-3">
+                    <div class="tab-pane fade show active" id="tab1">
+                        <h2 class="h4 mb-3">Tab1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, in et nulla impedit,
+                            mollitia eos quae inventore, minus molestiae est consequuntur nobis similique
+                            repudiandae reprehenderit fugit cumque voluptatum laudantium tempore.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur deleniti animi,
+                            voluptates expedita incidunt dignissimos fugiat repellendus dolorem ut corrupti sit
+                            libero nemo est iusto saepe, facilis rerum quam.</p>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <h2 class="h4 mb-3">Tab2</h2>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae soluta qui labore quas
+                            repudiandae illum dolore eum incidunt, quam aut perferendis autem iusto repellat ut
+                            nesciunt ullam dignissimos recusandae quo.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque atque incidunt modi quam
+                            laboriosam velit sit corporis veritatis optio voluptatum, officia quis quas debitis,
+                            commodi nisi, reprehenderit ratione nesciunt asperiores.</p>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                        <h2 class="h4 mb-3">Tab3</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt accusantium sapiente animi
+                            suscipit magnam ex quasi nihil quas voluptas! Eius minus incidunt iure deserunt dolor
+                            praesentium. Ullam aperiam optio omnis!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, cupiditate! Aspernatur
+                            accusamus dolores tenetur iure rerum ut quibusdam nisi aliquam facilis impedit. Sed amet
+                            nemo, veniam in placeat eveniet illo!</p>
+                    </div>
+                </div>
+                Тут может быть информация об общем состоянии, например, разделенная по типам машин
             </div>
         </div>
     </div>
-    <h3>Todo</h3>
-    <div>*общее состояние</div>
-    <div>*статистика простоев и тд</div>
-    <div>*расставлять приоритет работ</div>
-</body>
-
-</html>
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="card p-3 small-shadow d-flex flex-column align-items-center">
+            <div class="container" style="height:40vh">
+                Тут может быть еще какая-то информация
+            </div>
+        </div>
+    </div>
+</div>
+<h3>Todo</h3>
+<div>*общее состояние</div>
+<div>*статистика простоев и тд</div>
+<div>*расставлять приоритет работ</div>
+{% endblock %}
