@@ -1,35 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}Главная страница{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link href="/static/css/iconfont/material-icons.css" rel="stylesheet">
-    <script src="/static/js/jquery-3.4.1.slim.min.js"></script>
-    <script src="/static/js/popper.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <title>Главная страница</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Предприятие</a>
-    </nav>
-    <div class="column p-4 d-flex flex-column align-items-center">
-        <div class="card p-3 small-shadow d-flex flex-column align-items-center col-12 col-sm-6 col-lg-3">
-            <p class="h4 text-center">Пользователи</p>
-            <a href="/worker"><button type="button" class="btn btn-primary link-btn">Рабочий</button></a>
-            <a href="/site"><button type="button" class="btn btn-primary link-btn">Начальник
-                    участка</button></a>
-            <a href="/repair"><button type="button" class="btn btn-primary link-btn">Начальник рем.
-                    службы</button></a>
-            <a href="/foreman"><button type="button" class="btn btn-primary link-btn">Начальник
-                    цеха</button></a>
-        </div>
-        <img src="../static/images/mathematoms_black.png" class="p-5" width=300>
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Предприятие</a>
+</nav>
+<div class="column p-4 d-flex flex-column align-items-center">
+    <div class="card p-3 small-shadow d-flex flex-column align-items-center col-12 col-sm-6 col-lg-3">
+        <p class="h4 text-center">Пользователи</p>
+        <a href="/login"><button type="button" class="btn btn-primary link-btn">Авторизация</button></a>
+        <a href="/worker"><button type="button" class="btn btn-primary link-btn">Рабочий</button></a>
+        <a href="/site"><button type="button" class="btn btn-primary link-btn">Начальник
+                участка</button></a>
+        <a href="/repair"><button type="button" class="btn btn-primary link-btn">Начальник рем.
+                службы</button></a>
+        <a href="/foreman"><button type="button" class="btn btn-primary link-btn">Начальник
+                цеха</button></a>
     </div>
-</body>
-
-</html>
+    <img src="../static/images/mathematoms_black.png" class="p-5" width=300>
+</div>
+{% endblock %}
