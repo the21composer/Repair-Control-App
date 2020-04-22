@@ -16,8 +16,8 @@ app.secret_key = SECRET_KEY
 @app.route('/')
 def index():
     User('worker', '1', 'worker').save()
-    User('repair_manager', '1', 'repair_manager').save()
-    User('site_manager', '1', 'site_manager').save()
+    User('repair_manager', '1', 'repair').save()
+    User('site_manager', '1', 'site').save()
     User('foreman', '1', 'foreman').save()
     return render_template('index.html', login=session.get('user'))
 
