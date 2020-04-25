@@ -1,0 +1,13 @@
+/*
+* Custom styles file 
+*/
+
+.link-btn {
+    margin: 5px;
+    min-width: 220px;
+    max-width: 220px;
+}
+
+.small-shadow {
+    box-shadow: 0px 0px 8px #797979;
+}

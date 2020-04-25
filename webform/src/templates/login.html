@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="/"><i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Предприятие</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        {% if login %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active">Авторизован: {{login}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Выйти</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+  </nav>
+{% if error %}
+<div class="alert alert-danger" role="alert">{{ error }}</div>
+{% endif %}
+<div class="column p-4 d-flex flex-column align-items-center">
+    <div class="card p-3 small-shadow d-flex flex-column align-items-center col-12 col-sm-6 col-lg-3">
+        <p class="h4 text-center">Авторизация</p>
+        <form method="post" id="login">
+            <div class="form-group">
+                <label for="loginIn">Логин</label>
+                <input type="text" class="form-control" id="loginIn" name="loginIn">
+            </div>
+            <div class="form-group">
+                <label for="passwordIn">Пароль</label>
+                <input type="password" class="form-control" id="passwordIn" name="passwordIn">
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

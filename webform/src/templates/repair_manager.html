@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Начальник службы{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="/"><i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Начальник ремонтной службы</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        {% if login %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active">Авторизован: {{login}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Выйти</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+{% if error %}
+<div class="alert alert-danger" role="alert">{{ error }}</div>
+{% endif %}
+<div class="row p-3 w-100 m-0">
+    <div class="col-12 col-lg-9 p-0">
+        <div class="card p-3 small-shadow d-flex flex-column align-items-center">
+            <div class="container col-12">
+                <div class="d-flex justify-content-between mb-2">
+                    <h4>Ремонты</h4>
+                    <p><small> Н.О. - номер оборудования, Т.Р. - тип ремонта</small></p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" style="min-width: 800px;" id="dtHorizontalExample">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Н.О.</th>
+                                <th scope="col">Т.Р.</th>
+                                <th scope="col">Описание</th>
+                                <th scope="col">Выполнение</th>
+                                <th scope="col">Крайний срок</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rep in Repair.objects.all() %}
+                            <tr>
+                                <td scope="row">{{rep.machineID}} </td>
+                                <td scope="row">{{rep.rtype}}</td>
+                                <td scope="row" style="min-width: 300px;">{{rep.description}}</td>
+                                <td scope="row">
+                                    <div class="dropdown" id="edit{{rep._id}}">
+                                        {% if rep.completed %}
+                                        Выполнено
+                                        {% else %}
+                                        {% if rep.in_progress %}
+                                        В процессе
+                                        {% else %}
+                                        Не выполняется
+                                        {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if rep.deadline %}
+                                    {{rep.deadline.strftime("%d/%m/%y %H:%M")}}
+                                    {% else %}
+                                    <form method="post" id="date{{rep._id}}">
+                                        <div class="input-group mb-3">
+                                            <input name="ID" form="date{{rep._id}}" value="{{rep._id}}" type="hidden" />
+                                            <input type="text" form="date{{rep._id}}" name="{{rep._id}}" id="min"
+                                                class="datepicker-here form-control" data-timepicker="true" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="submit"
+                                                    id="accept">Назначить</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
+                                </td>
+                                {% if rep.completed %}
+                                <td>
+                                    <form method="post" id="close{{rep._id}}">
+                                        <input name="closeID" form="close{{rep._id}}" value="{{rep._id}}" type="hidden"/>
+                                        <button class="btn btn-outline-secondary" type="submit"
+                                            id="accept">Подтвердить</button>
+                                    </form>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#min').datepicker({
+        minDate: new Date()
+    })
+</script>
+<div>*осуществлять ремонт(например: назначить дату)</div>
+<div>*распределение ремонтников</div>
+{% endblock %}
