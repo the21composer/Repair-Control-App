@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Работа с файлами{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="/"><i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Администратор</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        {% if login %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active">Авторизован: {{login}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Выйти</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+{% if message %}
+<div class="alert alert-info" role="alert"> {{message}} </div>
+{% endif %}
+<div class="column p-4 d-flex flex-column align-items-center">
+    <div class="card p-3 small-shadow d-flex flex-column align-items-center col-12 col-sm-6 col-lg-3 mb-4">
+        <p class="h4 text-center">Меню</p>
+        <form enctype="multipart/form-data" method="post" class="d-flex flex-column align-items-center">
+            <input type="file" name="file" id="inputGroupFile02" class="form-control mb-2">
+            <div class="input-group mb-3">
+                <select class="custom-select" id="inputGroupSelect01" name="type">
+                  <option selected>Тип файла...</option>
+                  <option value="1">Ошибки</option>
+                  <option value="2">Отказы</option>
+                  <option value="3">Ремонты</option>
+                  <option value="4">Оборудование</option>
+                </select>
+              </div>
+            <button type="submit" class="btn btn-primary link-btn">Загрузить файл</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

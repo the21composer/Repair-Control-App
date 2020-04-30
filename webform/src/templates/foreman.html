@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}Начальник цеха{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="/"><i class="material-icons" style="color:#ffffff; font-size: 28px;">home</i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Начальник цеха</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        {% if login %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active">Авторизован: {{login}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Выйти</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+<div class="row p-3 w-100">
+    <div class="col-12">
+        <div class="card p-3 mb-4 small-shadow d-flex flex-column">
+            <h4 class="mb-3">Оборудование</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Модель</th>
+                            <th scope="col">Ошибки</th>
+                            <th scope="col">Отказы</th>
+                            <th scope="col">Сервис</th>
+                            <th scope="col">Показатели</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for eq in Equipment.objects.all() %}
+                        <tr>
+                            <th scope="row">{{eq.machineID}}</th>
+                            <td> {{eq.model}}</td>
+                            <td>
+                                {%if eq.errors %}
+                                <h5><span class="badge badge-primary">{{eq.errors|length}}</span></h5>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="min-width: 370px;">
+                                {%if eq.failures %}
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseF{{eq.machineID}}" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Показать 
+                                </button> <span class="badge badge-primary">{{eq.failures|length}}</span>
+                                </p>
+                                <div class="collapse" id="collapseF{{eq.machineID}}">
+                                    <table class="table table-borderless table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Дата</th>
+                                                <th scope="col">Тип</th>
+                                                <th scope="col">Детализация</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for fail in eq.failures %}
+                                            <tr>
+                                                <td> {{fail.time.strftime("%d/%m/%y %H:%M")}}</td>
+                                                <td> {{fail.ftype}}</td>
+                                                <td> {{fail.description}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="min-width: 370px;">
+                                {%if eq.services %}
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseS{{eq.machineID}}" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Показать 
+                                </button><span class="badge badge-primary">{{eq.services|length}}</span>
+                                </p>
+                                <div class="collapse" id="collapseS{{eq.machineID}}">
+                                    <table class="table table-borderless table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Дата</th>
+                                                <th scope="col">Тип</th>
+                                                <th scope="col">Детализация</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for serv in eq.services %}
+                                            <tr>
+                                                <td> {{serv.time.strftime("%d/%m/%y %H:%M")}}</td>
+                                                <td> {{serv.stype}}</td>
+                                                <td> {{serv.description}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="min-width: 400px;">
+                                {%if eq.telemetry %}
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseS{{eq.machineID}}" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Показать 
+                                </button><span class="badge badge-primary">{{eq.telemetry|length}}</span>
+                                </p>
+                                <div class="collapse" id="collapseS{{eq.machineID}}">
+                                    <table class="table table-borderless table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Дата</th>
+                                                <th scope="col">Напр.</th>
+                                                <th scope="col">Вращ.</th>
+                                                <th scope="col">Давл.</th>
+                                                <th scope="col">Вибр.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for tel in eq.telemetry %}
+                                            <tr>
+                                                <td> {{tel.time.strftime("%d/%m/%y %H:%M")}}</td>
+                                                <td> {{tel.volt}}</td>
+                                                <td> {{tel.rotate}}</td>
+                                                <td> {{tel.pressure}}</td>
+                                                <td> {{tel.vibration}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>*общее состояние</div>
+<div>*статистика простоев и тд</div>
+<div>*расставлять приоритет работ</div>
+{% endblock %}
